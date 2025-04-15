@@ -1,6 +1,6 @@
 {
   "name": "sundarcss",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A custom SCSS utility and animation framework by Mayank Joshi and team",
   "main": "scss/main.scss",
   "style": "scss/main.scss",
@@ -11,7 +11,13 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "scss", "utility", "css", "framework", "animation", "dark-mode", "responsive"
+    "scss",
+    "utility",
+    "css",
+    "framework",
+    "animation",
+    "dark-mode",
+    "responsive"
   ],
   "author": "Mayannk Joshi",
   "license": "MIT"
