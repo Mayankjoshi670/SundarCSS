@@ -1,0 +1,213 @@
+// Variables
+$grid-columns: 12;
+$grid-gap: 1rem;
+$breakpoints: (
+  'sm': 576px,
+  'md': 768px,
+  'lg': 992px,
+  'xl': 1200px
+);
+
+// Colors
+$colors: (
+  'primary': #007bff,
+  'secondary': #6c757d,
+  'success': #28a745,
+  'danger': #dc3545,
+  'warning': #ffc107,
+  'info': #17a2b8,
+  'light': #f8f9fa,
+  'dark': #343a40
+);
+
+// Spacing
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * 0.25,
+  2: $spacer * 0.5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3
+);
+
+// Typography
+$font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-sizes: (
+  'xs': 0.75rem,
+  'sm': 0.875rem,
+  'base': 1rem,
+  'lg': 1.125rem,
+  'xl': 1.25rem,
+  '2xl': 1.5rem,
+  '3xl': 1.875rem,
+  '4xl': 2.25rem
+);
+
+// Reset
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// Grid System
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $grid-gap;
+  padding-left: $grid-gap;
+
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      max-width: $width;
+    }
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -($grid-gap / 2);
+}
+
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    flex: 0 0 percentage($i / $grid-columns);
+    max-width: percentage($i / $grid-columns);
+    padding: $grid-gap / 2;
+  }
+}
+
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    @for $i from 1 through $grid-columns {
+      .col-#{$breakpoint}-#{$i} {
+        flex: 0 0 percentage($i / $grid-columns);
+        max-width: percentage($i / $grid-columns);
+        padding: $grid-gap / 2;
+      }
+    }
+  }
+}
+
+// Utility Classes
+// Margin and Padding
+$sides: ('t': 'top', 'r': 'right', 'b': 'bottom', 'l': 'left');
+$properties: ('m': 'margin', 'p': 'padding');
+
+@each $prop-short, $prop in $properties {
+  @each $space-key, $space-value in $spacers {
+    .#{$prop-short}-#{$space-key} {
+      #{$prop}: $space-value !important;
+    }
+    
+    @each $side-short, $side in $sides {
+      .#{$prop-short}#{$side-short}-#{$space-key} {
+        #{$prop}-#{$side}: $space-value !important;
+      }
+    }
+  }
+}
+
+// Flexbox
+.d-flex { display: flex !important; }
+.flex-row { flex-direction: row !important; }
+.flex-column { flex-direction: column !important; }
+.justify-content-start { justify-content: flex-start !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-end { justify-content: flex-end !important; }
+.justify-content-between { justify-content: space-between !important; }
+.align-items-start { align-items: flex-start !important; }
+.align-items-center { align-items: center !important; }
+.align-items-end { align-items: flex-end !important; }
+
+// Text utilities
+@each $size, $value in $font-sizes {
+  .text-#{$size} {
+    font-size: $value !important;
+  }
+}
+
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+
+// Colors
+@each $color-name, $color-value in $colors {
+  .text-#{$color-name} {
+    color: $color-value !important;
+  }
+  .bg-#{$color-name} {
+    background-color: $color-value !important;
+  }
+}
+
+// Dark Mode
+.dark {
+  background-color: map-get($colors, 'dark');
+  color: map-get($colors, 'light');
+
+  a {
+    color: map-get($colors, 'light');
+  }
+
+  header,
+  footer {
+    background-color: lighten(map-get($colors, 'dark'), 5%);
+    color: map-get($colors, 'light');
+  }
+
+  .bg-light {
+    background-color: #555 !important;
+  }
+
+  .text-dark {
+    color: #eee !important;
+  }
+
+  .toggle-btn {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #666;
+  }
+}
+
+
+// import google font
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+/* reset styles */
+* {
+  color: inherit;
+  margin: 0;
+}
+
+body {
+  font-family: Poppins;
+}
+
+ul {
+  padding: 0;
+  list-style-type: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+hr {
+  border: 0;
+  border-top: 1px dotted #efefef;
+}
+
+img {
+  max-width: 100%;
+}
+
+h1 {
+  a {
+    color: red;
+  }
+}
