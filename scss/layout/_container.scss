@@ -1,0 +1,30 @@
+
+// =============================================
+// Layout & Grid System
+// =============================================
+
+// Fluid container (full width)
+.container-fluid {
+    width: 100%;
+    padding-right: $grid-gap;
+    padding-left: $grid-gap;
+    margin-right: auto;
+    margin-left: auto;
+  }
+  
+  // Responsive container
+  .container {
+    width: 100%;
+    margin-right: auto;
+    margin-left: auto;
+    padding-right: $grid-gap;
+    padding-left: $grid-gap;
+  
+    // Set max-width for each breakpoint
+    @each $breakpoint, $width in $breakpoints {
+      @media (min-width: $width) {
+        max-width: $width;
+      }
+    }
+  }
+  

@@ -1,0 +1,42 @@
+// =============================================
+// Utility Classes
+// =============================================
+
+// Spacing utilities (margin and padding)
+$sides: ('t': 'top', 'r': 'right', 'b': 'bottom', 'l': 'left');
+$properties: ('m': 'margin', 'p': 'padding');
+
+// Generate margin and padding utilities
+@each $prop-short, $prop in $properties {
+  @each $space-key, $space-value in $spacers {
+    // All sides
+    .#{$prop-short}-#{$space-key} {
+      #{$prop}: $space-value !important;
+    }
+    
+    // Individual sides
+    @each $side-short, $side in $sides {
+      .#{$prop-short}#{$side-short}-#{$space-key} {
+        #{$prop}-#{$side}: $space-value !important;
+      }
+    }
+  }
+}
+
+// Axis-specific spacing (x-axis and y-axis)
+$axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
+
+@each $prop-short, $prop in $properties {
+  @each $space-key, $space-value in $spacers {
+    @each $axis, $dirs in $axes {
+      .#{$prop-short}#{$axis}-#{$space-key} {
+        @each $dir in $dirs {
+          #{$prop}-#{$dir}: $space-value !important;
+        }
+      }
+    }
+  }
+}
+
+// Auto margins
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }

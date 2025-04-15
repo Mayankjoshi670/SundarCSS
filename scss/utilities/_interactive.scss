@@ -1,0 +1,22 @@
+// Hover effects
+.hover-zoom {
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      transform: scale(1.05);
+    }
+  }
+  
+  .hover-shadow {
+    transition: box-shadow 0.3s ease-in-out;
+    &:hover {
+      box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    }
+  }
+  
+  .hover-animate-bounce {
+    transition: transform 0.3s ease-in-out;
+    &:hover {
+      animation: bounce 1s infinite;
+    }
+  }
+  

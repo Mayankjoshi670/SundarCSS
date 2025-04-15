@@ -1,0 +1,66 @@
+
+// Grid row
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin: -($grid-gap / 2); // Negative margin to counteract column padding
+  }
+  
+  // Base column classes
+  @for $i from 1 through $grid-columns {
+    .col-#{$i} {
+      flex: 0 0 percentage($i / $grid-columns);
+      max-width: percentage($i / $grid-columns);
+      padding: $grid-gap / 2;
+    }
+  }
+  
+  // Responsive column classes
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      @for $i from 1 through $grid-columns {
+        .col-#{$breakpoint}-#{$i} {
+          flex: 0 0 percentage($i / $grid-columns);
+          max-width: percentage($i / $grid-columns);
+          padding: $grid-gap / 2;
+        }
+      }
+    }
+  }
+  
+  // Column offsets
+  @for $i from 1 through $grid-columns {
+    .offset-#{$i} {
+      margin-left: percentage($i / $grid-columns);
+    }
+  }
+  
+  // Responsive column offsets
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      @for $i from 1 through $grid-columns {
+        .offset-#{$breakpoint}-#{$i} {
+          margin-left: percentage($i / $grid-columns);
+        }
+      }
+    }
+  }
+  
+  // Column ordering
+  @for $i from 1 through $grid-columns {
+    .order-#{$i} {
+      order: $i;
+    }
+  }
+  
+  // Responsive column ordering
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      @for $i from 1 through $grid-columns {
+        .order-#{$breakpoint}-#{$i} {
+          order: $i;
+        }
+      }
+    }
+  }
+  

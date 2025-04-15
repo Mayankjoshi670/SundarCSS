@@ -1,0 +1,44 @@
+// Grid system variables
+$grid-columns: 12; // Number of columns in the grid system
+$grid-gap: 1rem; // Default gap between grid columns
+
+
+
+// Color palette
+$colors: (
+  'primary': #007bff,   // Blue
+  'secondary': #6c757d, // Gray
+  'success': #28a745,   // Green
+  'danger': #dc3545,    // Red
+  'warning': #ffc107,   // Yellow
+  'info': #17a2b8,      // Teal
+  'light': #f8f9fa,     // Light gray
+  'dark': #343a40       // Dark gray
+);
+
+// Spacing system
+$spacer: 1rem; // Base spacing unit
+$spacers: (
+  0: 0,                // 0
+  1: $spacer * 0.25,   // 0.25rem
+  2: $spacer * 0.5,    // 0.5rem
+  3: $spacer,          // 1rem
+  4: $spacer * 1.5,    // 1.5rem
+  5: $spacer * 3       // 3rem
+);
+
+// Typography variables
+$font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-sizes: (
+  'xs': 0.75rem,     // Extra small
+  'sm': 0.875rem,    // Small
+  'base': 1rem,      // Base
+  'lg': 1.125rem,    // Large
+  'xl': 1.25rem,     // Extra large
+  '2xl': 1.5rem,     // 2x large
+  '3xl': 1.875rem,   // 3x large
+  '4xl': 2.25rem     // 4x large
+);
+
+// Transition speed
+$transition-speed: 0.3s; // Default transition duration

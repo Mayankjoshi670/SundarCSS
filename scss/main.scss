@@ -1,0 +1,39 @@
+// main.scss
+
+// 1. Abstracts
+
+@use '/abstracts/breakpoints';
+@use '/abstracts/functions';
+@use '/abstracts/mixins';
+@use '/abstracts/variables';
+
+// 2. Base
+
+@use '/base/reset';
+@use '/base/typography';
+
+// 3. Components
+
+@use '/components/buttons';
+@use '/components/cards';
+@use '/components/modals';
+
+// 4. Layout
+@use '/layout/container';
+@use '/layout/footer';
+@use '/layout/grid';
+@use '/layout/header';
+
+// 5. Themes
+
+@use '/themes/dark';
+@use '/themes/light';
+
+// 6. Utilities
+@use '/utilities/animations';
+@use '/utilities/colors';
+@use '/utilities/debug';
+@use '/utilities/flex';
+@use '/utilities/interactive';
+@use '/utilities/spacing';
+ 

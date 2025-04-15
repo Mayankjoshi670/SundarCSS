@@ -1,0 +1,33 @@
+// =============================================
+// Dark Mode
+// =============================================
+
+.dark {
+    background-color: map-get($colors, 'dark');
+    color: map-get($colors, 'light');
+  
+    a {
+      color: map-get($colors, 'light');
+    }
+  
+    header,
+    footer {
+      background-color: lighten(map-get($colors, 'dark'), 5%);
+      color: map-get($colors, 'light');
+    }
+  
+    .bg-light {
+      background-color: #555 !important;
+    }
+  
+    .text-dark {
+      color: #eee !important;
+    }
+  
+    .toggle-btn {
+      background-color: #444;
+      color: #fff;
+      border: 1px solid #666;
+    }
+  }
+  
