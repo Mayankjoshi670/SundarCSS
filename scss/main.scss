@@ -1,39 +1,909 @@
-// main.scss
+// // main.scss
 
-// 1. Abstracts
+// // 1. Abstracts
 
-@use 'abstracts/breakpoints';
-@use 'abstracts/functions';
-@use 'abstracts/mixins';
-@use 'abstracts/variables';
+// @use 'abstracts/breakpoints';
+// @use 'abstracts/functions';
+// @use 'abstracts/mixins';
+// @use 'abstracts/variables';
 
-// 2. Base
+// // 2. Base
 
-@use 'base/reset';
-@use 'base/typography';
+// @use 'base/reset';
+// @use 'base/typography';
 
-// 3. Components
+// // 3. Components
 
-@use 'components/buttons';
-@use 'components/cards';
-@use 'components/modals';
+// @use 'components/buttons';
+// @use 'components/cards';
+// @use 'components/modals';
 
-// 4. Layout
-@use 'layout/container';
-@use 'layout/footer';
-@use 'layout/grid';
-@use 'layout/header';
+// // 4. Layout
+// @use 'layout/container';
+// @use 'layout/footer';
+// @use 'layout/grid';
+// @use 'layout/header';
 
-// 5. Themes
+// // 5. Themes
 
-@use 'themes/dark';
-@use 'themes/light';
+// @use 'themes/dark';
+// @use 'themes/light';
 
-// 6. Utilities
-@use 'utilities/animations';
-@use 'utilities/colors';
-@use 'utilities/debug';
-@use 'utilities/flex';
-@use 'utilities/interactive';
-@use 'utilities/spacing';
+// // 6. Utilities
+// @use 'utilities/animations';
+// @use 'utilities/colors';
+// @use 'utilities/debug';
+// @use 'utilities/flex';
+// @use 'utilities/interactive';
+// @use 'utilities/spacing';
  
+
+
+// =============================================
+// Variables
+// =============================================
+
+// Grid system variables
+$grid-columns: 12; // Number of columns in the grid system
+$grid-gap: 1rem; // Default gap between grid columns
+
+// Breakpoints for responsive design
+$breakpoints: (
+  'sm': 576px,  // Small devices (phones)
+  'md': 768px,  // Medium devices (tablets)
+  'lg': 992px,  // Large devices (desktops)
+  'xl': 1200px  // Extra large devices (large desktops)
+);
+
+// Color palette
+$colors: (
+  'primary': #007bff,   // Blue
+  'secondary': #6c757d, // Gray
+  'success': #28a745,   // Green
+  'danger': #dc3545,    // Red
+  'warning': #ffc107,   // Yellow
+  'info': #17a2b8,      // Teal
+  'light': #f8f9fa,     // Light gray
+  'dark': #343a40       // Dark gray
+);
+
+// Spacing system
+$spacer: 1rem; // Base spacing unit
+$spacers: (
+  0: 0,                // 0
+  1: $spacer * 0.25,   // 0.25rem
+  2: $spacer * 0.5,    // 0.5rem
+  3: $spacer,          // 1rem
+  4: $spacer * 1.5,    // 1.5rem
+  5: $spacer * 3       // 3rem
+);
+
+// Typography variables
+$font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$font-sizes: (
+  'xs': 0.75rem,     // Extra small
+  'sm': 0.875rem,    // Small
+  'base': 1rem,      // Base
+  'lg': 1.125rem,    // Large
+  'xl': 1.25rem,     // Extra large
+  '2xl': 1.5rem,     // 2x large
+  '3xl': 1.875rem,   // 3x large
+  '4xl': 2.25rem     // 4x large
+);
+
+// Transition speed
+$transition-speed: 0.3s; // Default transition duration
+
+// =============================================
+// Reset & Base Styles
+// =============================================
+
+// Global box sizing reset
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+// =============================================
+// Layout & Grid System
+// =============================================
+
+// Fluid container (full width)
+.container-fluid {
+  width: 100%;
+  padding-right: $grid-gap;
+  padding-left: $grid-gap;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+// Responsive container
+.container {
+  width: 100%;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $grid-gap;
+  padding-left: $grid-gap;
+
+  // Set max-width for each breakpoint
+  @each $breakpoint, $width in $breakpoints {
+    @media (min-width: $width) {
+      max-width: $width;
+    }
+  }
+}
+
+// Grid row
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -($grid-gap / 2); // Negative margin to counteract column padding
+}
+
+// Base column classes
+@for $i from 1 through $grid-columns {
+  .col-#{$i} {
+    flex: 0 0 percentage($i / $grid-columns);
+    max-width: percentage($i / $grid-columns);
+    padding: $grid-gap / 2;
+  }
+}
+
+// Responsive column classes
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    @for $i from 1 through $grid-columns {
+      .col-#{$breakpoint}-#{$i} {
+        flex: 0 0 percentage($i / $grid-columns);
+        max-width: percentage($i / $grid-columns);
+        padding: $grid-gap / 2;
+      }
+    }
+  }
+}
+
+// Column offsets
+@for $i from 1 through $grid-columns {
+  .offset-#{$i} {
+    margin-left: percentage($i / $grid-columns);
+  }
+}
+
+// Responsive column offsets
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    @for $i from 1 through $grid-columns {
+      .offset-#{$breakpoint}-#{$i} {
+        margin-left: percentage($i / $grid-columns);
+      }
+    }
+  }
+}
+
+// Column ordering
+@for $i from 1 through $grid-columns {
+  .order-#{$i} {
+    order: $i;
+  }
+}
+
+// Responsive column ordering
+@each $breakpoint, $width in $breakpoints {
+  @media (min-width: $width) {
+    @for $i from 1 through $grid-columns {
+      .order-#{$breakpoint}-#{$i} {
+        order: $i;
+      }
+    }
+  }
+}
+
+// =============================================
+// Utility Classes
+// =============================================
+
+// Spacing utilities (margin and padding)
+$sides: ('t': 'top', 'r': 'right', 'b': 'bottom', 'l': 'left');
+$properties: ('m': 'margin', 'p': 'padding');
+
+// Generate margin and padding utilities
+@each $prop-short, $prop in $properties {
+  @each $space-key, $space-value in $spacers {
+    // All sides
+    .#{$prop-short}-#{$space-key} {
+      #{$prop}: $space-value !important;
+    }
+    
+    // Individual sides
+    @each $side-short, $side in $sides {
+      .#{$prop-short}#{$side-short}-#{$space-key} {
+        #{$prop}-#{$side}: $space-value !important;
+      }
+    }
+  }
+}
+
+// Axis-specific spacing (x-axis and y-axis)
+$axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
+
+@each $prop-short, $prop in $properties {
+  @each $space-key, $space-value in $spacers {
+    @each $axis, $dirs in $axes {
+      .#{$prop-short}#{$axis}-#{$space-key} {
+        @each $dir in $dirs {
+          #{$prop}-#{$dir}: $space-value !important;
+        }
+      }
+    }
+  }
+}
+
+// Flexbox utilities
+.d-flex { display: flex !important; }
+.flex-row { flex-direction: row !important; }
+.flex-column { flex-direction: column !important; }
+.flex-wrap { flex-wrap: wrap !important; }
+.flex-nowrap { flex-wrap: nowrap !important; }
+.flex-grow-1 { flex-grow: 1 !important; }
+.flex-shrink-0 { flex-shrink: 0 !important; }
+
+// Flexbox alignment
+.justify-content-start { justify-content: flex-start !important; }
+.justify-content-center { justify-content: center !important; }
+.justify-content-end { justify-content: flex-end !important; }
+.justify-content-between { justify-content: space-between !important; }
+.align-items-start { align-items: flex-start !important; }
+.align-items-center { align-items: center !important; }
+.align-items-end { align-items: flex-end !important; }
+
+// Gap utilities
+.gap-1 { gap: $spacer * 0.25 !important; }
+.gap-2 { gap: $spacer * 0.5 !important; }
+.gap-3 { gap: $spacer !important; }
+.gap-4 { gap: $spacer * 1.5 !important; }
+
+// Typography utilities
+@each $size, $value in $font-sizes {
+  .text-#{$size} {
+    font-size: $value !important;
+  }
+}
+
+// Font weight
+.font-bold { font-weight: 700 !important; }
+.font-semibold { font-weight: 600 !important; }
+.font-normal { font-weight: 400 !important; }
+.font-light { font-weight: 300 !important; }
+
+// Text transformation
+.uppercase { text-transform: uppercase !important; }
+.lowercase { text-transform: lowercase !important; }
+.capitalize { text-transform: capitalize !important; }
+
+// Line height
+.lh-1 { line-height: 1 !important; }
+.lh-sm { line-height: 1.25 !important; }
+.lh-base { line-height: 1.5 !important; }
+.lh-lg { line-height: 2 !important; }
+
+// Text alignment
+.text-center { text-align: center !important; }
+.text-left { text-align: left !important; }
+.text-right { text-align: right !important; }
+
+// Color utilities
+@each $color-name, $color-value in $colors {
+  .text-#{$color-name} {
+    color: $color-value !important;
+  }
+  .bg-#{$color-name} {
+    background-color: $color-value !important;
+  }
+}
+
+// Auto margins
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
+// =============================================
+// Transition & Animation Utilities
+// =============================================
+
+// Transition classes
+.transition {
+  transition: all $transition-speed ease-in-out !important;
+}
+
+.transition-fast {
+  transition: all 0.15s ease-in-out !important;
+}
+
+.transition-slow {
+  transition: all 0.5s ease-in-out !important;
+}
+
+// Animation keyframes
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slide-up {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes slide-down {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+    animation-timing-function: ease-in-out;
+  }
+  50% {
+    transform: translateY(-25px);
+    animation-timing-function: ease-in-out;
+  }
+}
+
+@keyframes slide-fade-left {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slide-fade-right {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes flip {
+  from {
+    transform: rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotateY(0deg);
+    opacity: 1;
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+}
+
+// Animation classes
+.animate-fade-in {
+  animation: fade-in 0.5s ease-in-out forwards !important;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards !important;
+}
+
+.animate-slide-down {
+  animation: slide-down 0.5s ease-out forwards !important;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.animate-slide-fade-left {
+  animation: slide-fade-left 0.6s ease-out forwards;
+}
+
+.animate-slide-fade-right {
+  animation: slide-fade-right 0.6s ease-out forwards;
+}
+
+.animate-flip {
+  animation: flip 0.8s ease-out forwards;
+  transform-style: preserve-3d;
+}
+
+.animate-pulse {
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+// Animation timing utilities
+.duration-300 { animation-duration: 0.3s !important; }
+.duration-500 { animation-duration: 0.5s !important; }
+.duration-1000 { animation-duration: 1s !important; }
+
+.delay-100 { animation-delay: 0.1s !important; }
+.delay-500 { animation-delay: 0.5s !important; }
+
+.fill-forwards { animation-fill-mode: forwards !important; }
+
+// =============================================
+// Interactive Utilities
+// =============================================
+
+// Hover effects
+.hover-zoom {
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+
+.hover-shadow {
+  transition: box-shadow 0.3s ease-in-out;
+  &:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+}
+
+.hover-animate-bounce {
+  transition: transform 0.3s ease-in-out;
+  &:hover {
+    animation: bounce 1s infinite;
+  }
+}
+
+// =============================================
+// Dark Mode
+// =============================================
+
+.dark {
+  background-color: map-get($colors, 'dark');
+  color: map-get($colors, 'light');
+
+  a {
+    color: map-get($colors, 'light');
+  }
+
+  header,
+  footer {
+    background-color: lighten(map-get($colors, 'dark'), 5%);
+    color: map-get($colors, 'light');
+  }
+
+  .bg-light {
+    background-color: #555 !important;
+  }
+
+  .text-dark {
+    color: #eee !important;
+  }
+
+  .toggle-btn {
+    background-color: #444;
+    color: #fff;
+    border: 1px solid #666;
+  }
+}
+
+// =============================================
+// Debug Utilities
+// =============================================
+
+.debug-grid > [class^='col'] {
+  outline: 1px dashed rgba(0, 0, 0, 0.1);
+}
+
+
+
+
+
+
+
+
+
+// =============================================
+// Advanced Entrance Animations
+// =============================================
+
+// Rotating entrance
+@keyframes rotate-in {
+  0% {
+    transform: rotate(-180deg) scale(0);
+    opacity: 0;
+  }
+  100% {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+}
+
+.animate-rotate-in {
+  animation: rotate-in 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  transform-origin: center;
+}
+
+// 3D flip entrance
+@keyframes flip-in-x {
+  from {
+    transform: perspective(400px) rotateX(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(400px) rotateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes flip-in-y {
+  from {
+    transform: perspective(400px) rotateY(90deg);
+    opacity: 0;
+  }
+  to {
+    transform: perspective(400px) rotateY(0);
+    opacity: 1;
+  }
+}
+
+.animate-flip-in-x {
+  animation: flip-in-x 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  backface-visibility: visible !important;
+}
+
+.animate-flip-in-y {
+  animation: flip-in-y 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  backface-visibility: visible !important;
+}
+
+// Staggered children animation
+.stagger-children > * {
+  opacity: 0;
+  animation: fade-in 0.5s ease forwards;
+}
+
+@for $i from 1 through 10 {
+  .stagger-children > *:nth-child(#{$i}) {
+    animation-delay: 0.1s * $i;
+  }
+}
+
+
+
+// =============================================
+// Advanced Attention Seekers
+// =============================================
+
+// Heartbeat effect
+@keyframes heartbeat {
+  0% {
+    transform: scale(1);
+  }
+  14% {
+    transform: scale(1.3);
+  }
+  28% {
+    transform: scale(1);
+  }
+  42% {
+    transform: scale(1.3);
+  }
+  70% {
+    transform: scale(1);
+  }
+}
+
+.animate-heartbeat {
+  animation: heartbeat 1.3s ease-in-out infinite;
+  transform-origin: center;
+}
+
+// Jiggle effect
+@keyframes jiggle {
+  0%, 100% {
+    transform: rotate(0deg);
+  }
+  25% {
+    transform: rotate(-5deg);
+  }
+  75% {
+    transform: rotate(5deg);
+  }
+}
+
+.animate-jiggle {
+  animation: jiggle 0.4s ease-in-out infinite;
+}
+
+// Rubber band effect
+@keyframes rubber-band {
+  0% {
+    transform: scaleX(1);
+  }
+  30% {
+    transform: scaleX(1.25) scaleY(0.75);
+  }
+  40% {
+    transform: scaleX(0.75) scaleY(1.25);
+  }
+  60% {
+    transform: scaleX(1.15) scaleY(0.85);
+  }
+  100% {
+    transform: scaleX(1) scaleY(1);
+  }
+}
+
+.animate-rubber-band {
+  animation: rubber-band 0.8s ease-out;
+}
+
+
+
+
+
+
+
+// =============================================
+// Advanced Exit Animations
+// =============================================
+
+// Disappearing vortex
+@keyframes vortex-out {
+  0% {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(180deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.animate-vortex-out {
+  animation: vortex-out 0.5s ease-in forwards;
+}
+
+// Fold out
+@keyframes fold-out {
+  0% {
+    transform: scaleY(1);
+    opacity: 1;
+  }
+  60% {
+    transform: scaleY(0.6);
+    opacity: 0.6;
+  }
+  100% {
+    transform: scaleY(0) scaleX(0);
+    opacity: 0;
+  }
+}
+
+.animate-fold-out {
+  animation: fold-out 0.5s cubic-bezier(0.55, 0.085, 0.68, 0.53) forwards;
+  transform-origin: top;
+}
+
+// Swirl out
+@keyframes swirl-out {
+  0% {
+    transform: rotate(0) scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: rotate(540deg) scale(0);
+    opacity: 0;
+  }
+}
+
+.animate-swirl-out {
+  animation: swirl-out 0.6s ease-in forwards;
+}
+
+
+
+
+
+// =============================================
+// Special Effects
+// =============================================
+
+// Glow effect
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  }
+  50% {
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.9);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
+  }
+}
+
+.animate-glow {
+  animation: glow 1.5s ease-in-out infinite;
+}
+
+// Gradient background animation
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  animation: gradient-shift 8s ease infinite;
+  background-size: 200% 200%;
+}
+
+// Flicker effect
+@keyframes flicker {
+  0%, 100% {
+    opacity: 1;
+  }
+  25%, 75% {
+    opacity: 0.9;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+.animate-flicker {
+  animation: flicker 2s linear infinite;
+}
+
+
+
+// =============================================
+// Physics-Based Animations
+// =============================================
+
+// Spring bounce
+@keyframes spring-bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  25% {
+    transform: translateY(-30px);
+  }
+  50% {
+    transform: translateY(0);
+  }
+  75% {
+    transform: translateY(-15px);
+  }
+}
+
+.animate-spring {
+  animation: spring-bounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+// Wobble effect
+@keyframes wobble {
+  0%, 100% {
+    transform: translateX(0%);
+  }
+  15% {
+    transform: translateX(-25%) rotate(-5deg);
+  }
+  30% {
+    transform: translateX(20%) rotate(3deg);
+  }
+  45% {
+    transform: translateX(-15%) rotate(-3deg);
+  }
+  60% {
+    transform: translateX(10%) rotate(2deg);
+  }
+  75% {
+    transform: translateX(-5%) rotate(-1deg);
+  }
+}
+
+.animate-wobble {
+  animation: wobble 1s ease-in-out forwards;
+}
+
+// Swing effect
+@keyframes swing {
+  20% {
+    transform: rotate(15deg);
+  }
+  40% {
+    transform: rotate(-10deg);
+  }
+  60% {
+    transform: rotate(5deg);
+  }
+  80% {
+    transform: rotate(-5deg);
+  }
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+.animate-swing {
+  animation: swing 1s ease-in-out forwards;
+  transform-origin: top center;
+}
+
+
+
+// =============================================
+// Scroll-Based Animations
+// =============================================
+
+// Fade in on scroll
+@keyframes fade-in-scroll {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.scroll-fade-in {
+  opacity: 0;
+  animation: fade-in-scroll 0.6s ease forwards;
+  animation-timeline: view();
+  animation-range: entry 20% cover 30%;
+}
+
+// Scale in on scroll
+@keyframes scale-in-scroll {
+  from {
+    transform: scale(0.8);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.scroll-scale-in {
+  opacity: 0;
+  animation: scale-in-scroll 0.6s ease forwards;
+  animation-timeline: view();
+  animation-range: entry 10% cover 20%;
+}
+
+// Rotate in on scroll
+@keyframes rotate-in-scroll {
+  from {
+    transform: rotate(-15deg);
+    opacity: 0;
+  }
+  to {
+    transform: rotate(0);
+    opacity: 1;
+  }
+}
+
+.scroll-rotate-in {
+  opacity: 0;
+  animation: rotate-in-scroll 0.8s ease forwards;
+  animation-timeline: view();
+  animation-range: entry 10% cover 25%;
+}
