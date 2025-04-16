@@ -1,6 +1,6 @@
 {
   "name": "sundarcss",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "A custom SCSS utility and animation framework by Mayank Joshi and team",
   "main": "scss/main.scss",
   "style": "scss/main.scss",
