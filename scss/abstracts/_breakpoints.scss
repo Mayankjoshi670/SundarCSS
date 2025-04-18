@@ -1,7 +1,6 @@
-// Breakpoints for responsive design
 $breakpoints: (
-  'sm': 576px,  // Small devices (phones)
-  'md': 768px,  // Medium devices (tablets)
-  'lg': 992px,  // Large devices (desktops)
+  'sm': 576px,  // Small device (phones)
+  'md': 768px,  // Medium device (tab)
+  'lg': 992px,  // Large device (desktops , lapi)
   'xl': 1200px  // Extra large devices (large desktops)
 );

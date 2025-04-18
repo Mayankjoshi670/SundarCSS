@@ -1,115 +1,56 @@
-// // main.scss
+$grid-columns: 12; 
+$grid-gap: 1rem; 
 
-// // 1. Abstracts
-
-// @use 'abstracts/breakpoints';
-// @use 'abstracts/functions';
-// @use 'abstracts/mixins';
-// @use 'abstracts/variables';
-
-// // 2. Base
-
-// @use 'base/reset';
-// @use 'base/typography';
-
-// // 3. Components
-
-// @use 'components/buttons';
-// @use 'components/cards';
-// @use 'components/modals';
-
-// // 4. Layout
-// @use 'layout/container';
-// @use 'layout/footer';
-// @use 'layout/grid';
-// @use 'layout/header';
-
-// // 5. Themes
-
-// @use 'themes/dark';
-// @use 'themes/light';
-
-// // 6. Utilities
-// @use 'utilities/animations';
-// @use 'utilities/colors';
-// @use 'utilities/debug';
-// @use 'utilities/flex';
-// @use 'utilities/interactive';
-// @use 'utilities/spacing';
- 
-
-
-// =============================================
-// Variables
-// =============================================
-
-// Grid system variables
-$grid-columns: 12; // Number of columns in the grid system
-$grid-gap: 1rem; // Default gap between grid columns
-
-// Breakpoints for responsive design
 $breakpoints: (
-  'sm': 576px,  // Small devices (phones)
-  'md': 768px,  // Medium devices (tablets)
-  'lg': 992px,  // Large devices (desktops)
-  'xl': 1200px  // Extra large devices (large desktops)
+  'sm': 576px,  
+  'md': 768px,  
+  'lg': 992px,  
+  'xl': 1200px  
 );
 
-// Color palette
 $colors: (
-  'primary': #007bff,   // Blue
-  'secondary': #6c757d, // Gray
-  'success': #28a745,   // Green
-  'danger': #dc3545,    // Red
-  'warning': #ffc107,   // Yellow
-  'info': #17a2b8,      // Teal
-  'light': #f8f9fa,     // Light gray
-  'dark': #343a40       // Dark gray
+  'primary': #007bff,   
+  'secondary': #6c757d, 
+    'success': #28a745, 
+  'danger': #dc3545,    
+  'warning': #ffc107,   
+  'info': #17a2b8,      
+  'light': #f8f9fa,     
+  'dark': #343a40       
 );
 
-// Spacing system
-$spacer: 1rem; // Base spacing unit
+$spacer: 1rem; 
 $spacers: (
-  0: 0,                // 0
-  1: $spacer * 0.25,   // 0.25rem
-  2: $spacer * 0.5,    // 0.5rem
-  3: $spacer,          // 1rem
-  4: $spacer * 1.5,    // 1.5rem
-  5: $spacer * 3       // 3rem
+  0: 0,                
+  1: $spacer * 0.25,    
+  2: $spacer * 0.5,     
+  3: $spacer,           
+  4: $spacer * 1.5,     
+  5: $spacer * 3        
 );
 
-// Typography variables
 $font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-sizes: (
-  'xs': 0.75rem,     // Extra small
-  'sm': 0.875rem,    // Small
-  'base': 1rem,      // Base
-  'lg': 1.125rem,    // Large
-  'xl': 1.25rem,     // Extra large
-  '2xl': 1.5rem,     // 2x large
-  '3xl': 1.875rem,   // 3x large
-  '4xl': 2.25rem     // 4x large
+  'xs': 0.75rem,     
+  'sm': 0.875rem,     
+  'base': 1rem,       
+  'lg': 1.125rem,     
+  'xl': 1.25rem,      
+  '2xl': 1.5rem,      
+  '3xl': 1.875rem,    
+  '4xl': 2.25rem      
 );
 
-// Transition speed
-$transition-speed: 0.3s; // Default transition duration
+ 
+$transition-speed: 0.3s; 
 
-// =============================================
-// Reset & Base Styles
-// =============================================
-
-// Global box sizing reset
+  
 *, *::before, *::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
-
-// =============================================
-// Layout & Grid System
-// =============================================
-
-// Fluid container (full width)
+ 
 .container-fluid {
   width: 100%;
   padding-right: $grid-gap;
@@ -117,31 +58,27 @@ $transition-speed: 0.3s; // Default transition duration
   margin-right: auto;
   margin-left: auto;
 }
-
-// Responsive container
+ 
 .container {
   width: 100%;
   margin-right: auto;
   margin-left: auto;
   padding-right: $grid-gap;
   padding-left: $grid-gap;
-
-  // Set max-width for each breakpoint
+ 
   @each $breakpoint, $width in $breakpoints {
     @media (min-width: $width) {
       max-width: $width;
     }
   }
 }
-
-// Grid row
+ 
 .row {
   display: flex;
   flex-wrap: wrap;
-  margin: -($grid-gap / 2); // Negative margin to counteract column padding
+  margin: -($grid-gap / 2);  
 }
-
-// Base column classes
+ 
 @for $i from 1 through $grid-columns {
   .col-#{$i} {
     flex: 0 0 percentage($i / $grid-columns);
@@ -149,8 +86,7 @@ $transition-speed: 0.3s; // Default transition duration
     padding: $grid-gap / 2;
   }
 }
-
-// Responsive column classes
+ 
 @each $breakpoint, $width in $breakpoints {
   @media (min-width: $width) {
     @for $i from 1 through $grid-columns {
@@ -162,15 +98,13 @@ $transition-speed: 0.3s; // Default transition duration
     }
   }
 }
-
-// Column offsets
+ 
 @for $i from 1 through $grid-columns {
   .offset-#{$i} {
     margin-left: percentage($i / $grid-columns);
   }
 }
-
-// Responsive column offsets
+ 
 @each $breakpoint, $width in $breakpoints {
   @media (min-width: $width) {
     @for $i from 1 through $grid-columns {
@@ -180,15 +114,13 @@ $transition-speed: 0.3s; // Default transition duration
     }
   }
 }
-
-// Column ordering
+ 
 @for $i from 1 through $grid-columns {
   .order-#{$i} {
     order: $i;
   }
 }
-
-// Responsive column ordering
+ 
 @each $breakpoint, $width in $breakpoints {
   @media (min-width: $width) {
     @for $i from 1 through $grid-columns {
@@ -198,33 +130,27 @@ $transition-speed: 0.3s; // Default transition duration
     }
   }
 }
-
-// =============================================
-// Utility Classes
-// =============================================
-
-// Spacing utilities (margin and padding)
+ 
+ 
 $sides: ('t': 'top', 'r': 'right', 'b': 'bottom', 'l': 'left');
 $properties: ('m': 'margin', 'p': 'padding');
-
-// Generate margin and padding utilities
+ 
 @each $prop-short, $prop in $properties {
   @each $space-key, $space-value in $spacers {
-    // All sides
+   
     .#{$prop-short}-#{$space-key} {
       #{$prop}: $space-value !important;
     }
     
-    // Individual sides
+   
     @each $side-short, $side in $sides {
       .#{$prop-short}#{$side-short}-#{$space-key} {
         #{$prop}-#{$side}: $space-value !important;
       }
     }
   }
-}
+} 
 
-// Axis-specific spacing (x-axis and y-axis)
 $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 
 @each $prop-short, $prop in $properties {
@@ -238,8 +164,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
     }
   }
 }
-
-// Flexbox utilities
+ 
 .d-flex { display: flex !important; }
 .flex-row { flex-direction: row !important; }
 .flex-column { flex-direction: column !important; }
@@ -247,8 +172,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 .flex-nowrap { flex-wrap: nowrap !important; }
 .flex-grow-1 { flex-grow: 1 !important; }
 .flex-shrink-0 { flex-shrink: 0 !important; }
-
-// Flexbox alignment
+ 
 .justify-content-start { justify-content: flex-start !important; }
 .justify-content-center { justify-content: center !important; }
 .justify-content-end { justify-content: flex-end !important; }
@@ -257,42 +181,37 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 .align-items-center { align-items: center !important; }
 .align-items-end { align-items: flex-end !important; }
 
-// Gap utilities
+ 
 .gap-1 { gap: $spacer * 0.25 !important; }
 .gap-2 { gap: $spacer * 0.5 !important; }
 .gap-3 { gap: $spacer !important; }
 .gap-4 { gap: $spacer * 1.5 !important; }
 
-// Typography utilities
+ 
 @each $size, $value in $font-sizes {
   .text-#{$size} {
     font-size: $value !important;
   }
 }
-
-// Font weight
+ 
 .font-bold { font-weight: 700 !important; }
 .font-semibold { font-weight: 600 !important; }
 .font-normal { font-weight: 400 !important; }
 .font-light { font-weight: 300 !important; }
-
-// Text transformation
+ 
 .uppercase { text-transform: uppercase !important; }
 .lowercase { text-transform: lowercase !important; }
 .capitalize { text-transform: capitalize !important; }
-
-// Line height
+ 
 .lh-1 { line-height: 1 !important; }
 .lh-sm { line-height: 1.25 !important; }
 .lh-base { line-height: 1.5 !important; }
 .lh-lg { line-height: 2 !important; }
-
-// Text alignment
+ 
 .text-center { text-align: center !important; }
 .text-left { text-align: left !important; }
 .text-right { text-align: right !important; }
-
-// Color utilities
+ 
 @each $color-name, $color-value in $colors {
   .text-#{$color-name} {
     color: $color-value !important;
@@ -301,15 +220,10 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
     background-color: $color-value !important;
   }
 }
-
-// Auto margins
+ 
 .mx-auto { margin-left: auto !important; margin-right: auto !important; }
 
-// =============================================
-// Transition & Animation Utilities
-// =============================================
-
-// Transition classes
+ 
 .transition {
   transition: all $transition-speed ease-in-out !important;
 }
@@ -321,8 +235,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 .transition-slow {
   transition: all 0.5s ease-in-out !important;
 }
-
-// Animation keyframes
+ 
 @keyframes fade-in {
   from { opacity: 0; }
   to { opacity: 1; }
@@ -392,6 +305,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 }
 
 // Animation classes
+
 .animate-fade-in {
   animation: fade-in 0.5s ease-in-out forwards !important;
 }
@@ -424,8 +338,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 .animate-pulse {
   animation: pulse 1.5s ease-in-out infinite;
 }
-
-// Animation timing utilities
+ 
 .duration-300 { animation-duration: 0.3s !important; }
 .duration-500 { animation-duration: 0.5s !important; }
 .duration-1000 { animation-duration: 1s !important; }
@@ -435,11 +348,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 
 .fill-forwards { animation-fill-mode: forwards !important; }
 
-// =============================================
-// Interactive Utilities
-// =============================================
-
-// Hover effects
+ 
 .hover-zoom {
   transition: transform 0.3s ease-in-out;
   &:hover {
@@ -460,11 +369,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
     animation: bounce 1s infinite;
   }
 }
-
-// =============================================
-// Dark Mode
-// =============================================
-
+ 
 .dark {
   background-color: map-get($colors, 'dark');
   color: map-get($colors, 'light');
@@ -494,9 +399,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   }
 }
 
-// =============================================
-// Debug Utilities
-// =============================================
+ 
 
 .debug-grid > [class^='col'] {
   outline: 1px dashed rgba(0, 0, 0, 0.1);
@@ -509,12 +412,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 
 
 
-
-// =============================================
-// Advanced Entrance Animations
-// =============================================
-
-// Rotating entrance
+ 
 @keyframes rotate-in {
   0% {
     transform: rotate(-180deg) scale(0);
@@ -531,7 +429,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   transform-origin: center;
 }
 
-// 3D flip entrance
+ 
 @keyframes flip-in-x {
   from {
     transform: perspective(400px) rotateX(90deg);
@@ -564,7 +462,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   backface-visibility: visible !important;
 }
 
-// Staggered children animation
+ 
 .stagger-children > * {
   opacity: 0;
   animation: fade-in 0.5s ease forwards;
@@ -578,11 +476,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 
 
 
-// =============================================
-// Advanced Attention Seekers
-// =============================================
-
-// Heartbeat effect
+ 
 @keyframes heartbeat {
   0% {
     transform: scale(1);
@@ -606,7 +500,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   transform-origin: center;
 }
 
-// Jiggle effect
+ 
 @keyframes jiggle {
   0%, 100% {
     transform: rotate(0deg);
@@ -623,7 +517,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   animation: jiggle 0.4s ease-in-out infinite;
 }
 
-// Rubber band effect
+ 
 @keyframes rubber-band {
   0% {
     transform: scaleX(1);
@@ -651,12 +545,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 
 
 
-
-// =============================================
-// Advanced Exit Animations
-// =============================================
-
-// Disappearing vortex
+ 
 @keyframes vortex-out {
   0% {
     transform: rotate(0) scale(1);
@@ -713,11 +602,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 
 
 
-// =============================================
-// Special Effects
-// =============================================
-
-// Glow effect
+ 
 @keyframes glow {
   0% {
     box-shadow: 0 0 5px rgba(255, 255, 255, 0.7);
@@ -733,8 +618,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 .animate-glow {
   animation: glow 1.5s ease-in-out infinite;
 }
-
-// Gradient background animation
+ 
 @keyframes gradient-shift {
   0% {
     background-position: 0% 50%;
@@ -751,8 +635,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   animation: gradient-shift 8s ease infinite;
   background-size: 200% 200%;
 }
-
-// Flicker effect
+ 
 @keyframes flicker {
   0%, 100% {
     opacity: 1;
@@ -769,13 +652,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   animation: flicker 2s linear infinite;
 }
 
-
-
-// =============================================
-// Physics-Based Animations
-// =============================================
-
-// Spring bounce
+ 
 @keyframes spring-bounce {
   0%, 100% {
     transform: translateY(0);
@@ -794,8 +671,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 .animate-spring {
   animation: spring-bounce 1s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
 }
-
-// Wobble effect
+ 
 @keyframes wobble {
   0%, 100% {
     transform: translateX(0%);
@@ -820,8 +696,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 .animate-wobble {
   animation: wobble 1s ease-in-out forwards;
 }
-
-// Swing effect
+  
 @keyframes swing {
   20% {
     transform: rotate(15deg);
@@ -847,11 +722,7 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
 
 
 
-// =============================================
-// Scroll-Based Animations
-// =============================================
-
-// Fade in on scroll
+ 
 @keyframes fade-in-scroll {
   from {
     opacity: 0;
@@ -870,7 +741,6 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   animation-range: entry 20% cover 30%;
 }
 
-// Scale in on scroll
 @keyframes scale-in-scroll {
   from {
     transform: scale(0.8);
@@ -889,7 +759,6 @@ $axes: ('x': ('left', 'right'), 'y': ('top', 'bottom'));
   animation-range: entry 10% cover 20%;
 }
 
-// Rotate in on scroll
 @keyframes rotate-in-scroll {
   from {
     transform: rotate(-15deg);

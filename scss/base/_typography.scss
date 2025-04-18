@@ -1,4 +1,3 @@
-// Typography utilities
 @each $size, $value in $font-sizes {
     .text-#{$size} {
       font-size: $value !important;

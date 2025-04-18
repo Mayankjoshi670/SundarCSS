@@ -1,10 +1,9 @@
-// Grid system variables
-$grid-columns: 12; // Number of columns in the grid system
-$grid-gap: 1rem; // Default gap between grid columns
+// Grid system variables 12 column grid 
+$grid-columns: 12; // Number of col
+$grid-gap: 1rem; // default gap 
 
 
 
-// Color palette
 $colors: (
   'primary': #007bff,   // Blue
   'secondary': #6c757d, // Gray
@@ -17,7 +16,7 @@ $colors: (
 );
 
 // Spacing system
-$spacer: 1rem; // Base spacing unit
+$spacer: 1rem; // Base 
 $spacers: (
   0: 0,                // 0
   1: $spacer * 0.25,   // 0.25rem
@@ -27,18 +26,18 @@ $spacers: (
   5: $spacer * 3       // 3rem
 );
 
-// Typography variables
+
 $font-family-base: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 $font-sizes: (
   'xs': 0.75rem,     // Extra small
   'sm': 0.875rem,    // Small
   'base': 1rem,      // Base
-  'lg': 1.125rem,    // Large
-  'xl': 1.25rem,     // Extra large
-  '2xl': 1.5rem,     // 2x large
-  '3xl': 1.875rem,   // 3x large
-  '4xl': 2.25rem     // 4x large
+  'lg': 1.125rem,    // L
+  'xl': 1.25rem,     // LL
+  '2xl': 1.5rem,     // XXl 
+  '3xl': 1.875rem,   // XXXL 
+  '4xl': 2.25rem     // XXXXL 
 );
 
-// Transition speed
-$transition-speed: 0.3s; // Default transition duration
+
+$transition-speed: 0.3s; // Default  duration

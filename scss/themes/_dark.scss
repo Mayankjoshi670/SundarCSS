@@ -1,7 +1,4 @@
-// =============================================
-// Dark Mode
-// =============================================
-
+//  dark mode 
 .dark {
     background-color: map-get($colors, 'dark');
     color: map-get($colors, 'light');

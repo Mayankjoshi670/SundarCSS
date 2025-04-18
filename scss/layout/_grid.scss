@@ -1,12 +1,12 @@
-
-// Grid row
+//  12 col grid system 
+// row of a grid 
 .row {
     display: flex;
     flex-wrap: wrap;
-    margin: -($grid-gap / 2); // Negative margin to counteract column padding
+    margin: -($grid-gap / 2); // -ve margin
   }
   
-  // Base column classes
+  // Base column 
   @for $i from 1 through $grid-columns {
     .col-#{$i} {
       flex: 0 0 percentage($i / $grid-columns);
@@ -15,7 +15,7 @@
     }
   }
   
-  // Responsive column classes
+  // Responsive column 
   @each $breakpoint, $width in $breakpoints {
     @media (min-width: $width) {
       @for $i from 1 through $grid-columns {
@@ -28,14 +28,14 @@
     }
   }
   
-  // Column offsets
+  // Column offsets val
   @for $i from 1 through $grid-columns {
     .offset-#{$i} {
       margin-left: percentage($i / $grid-columns);
     }
   }
   
-  // Responsive column offsets
+  // Responsive column 
   @each $breakpoint, $width in $breakpoints {
     @media (min-width: $width) {
       @for $i from 1 through $grid-columns {
@@ -46,14 +46,14 @@
     }
   }
   
-  // Column ordering
+  // Column order
   @for $i from 1 through $grid-columns {
     .order-#{$i} {
       order: $i;
     }
   }
   
-  // Responsive column ordering
+  // Responsive column order
   @each $breakpoint, $width in $breakpoints {
     @media (min-width: $width) {
       @for $i from 1 through $grid-columns {
